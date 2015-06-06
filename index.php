@@ -44,17 +44,18 @@ $app->get('/', function () use ($app, $catalog) {
 
 $app->get('/page/:name.html', function ($name) use ($app, $catalog) {
     $name = trim($name);
-    $filepath = dirname(__FILE__) . '/books/guide/' . $name . '.md';
-    if (!is_file($filepath)) {
+    $filename = dirname(__FILE__) . '/books/guide/' . $name . '.md';
+    if (!is_file($filename)) {
         $app->notFound();
     }
     $parser = new \cebe\markdown\GithubMarkdown();
-    $markdownContent = $parser->parse(file_get_contents($filepath));
-
+    $article = [
+        'lastModifyTime' => filemtime($filename),
+        'content' => $parser->parse(file_get_contents($filename)),
+    ];
 
     $app->render('view.twig', [
-        'activeName' => $name,
-        'data' => $markdownContent,
+        'article' => $article,
         'catalog' => $catalog
     ]);
 })->name('page');
