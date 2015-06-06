@@ -4,6 +4,13 @@ require 'vendor/autoload.php';
 
 $configs = require 'configs/web.php';
 $app = new \Slim\Slim($configs);
+
+// Check book.path value
+$bookPath = $app->config('book.path');
+if (empty($bookPath)) {
+    die('You must config boo.path value in "' . dirname(__FILE__) . '/configs/web.php".');
+}
+
 $view = $app->view();
 $view->setTemplatesDirectory('./templates');
 $view->parserOptions = array(
@@ -21,9 +28,9 @@ $app->notFound(function() use ($app) {
     $app->render('404.twig');
 });
 
-// 文章分类
-$catalog = [];
-$filepath = dirname(__FILE__) . '/books/guide/catalog.md';
+// Book catalog
+$catalog = array();
+$filepath = $bookPath . '/catalog.md';
 $lines = file($filepath);
 if ($lines) {
     foreach ($lines as $line) {
@@ -42,9 +49,9 @@ $app->get('/', function () use ($app, $catalog) {
     ]);
 });
 
-$app->get('/page/:name.html', function ($name) use ($app, $catalog) {
+$app->get('/page/:name.html', function ($name) use ($app, $catalog, $bookPath) {
     $name = trim($name);
-    $filename = dirname(__FILE__) . '/books/guide/' . $name . '.md';
+    $filename = $bookPath . '/' . $name . '.md';
     if (!is_file($filename)) {
         $app->notFound();
     }
