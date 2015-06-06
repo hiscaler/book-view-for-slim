@@ -1,0 +1,175 @@
+/*******************************************************************************
+ * Common
+ ******************************************************************************/
+html, body {
+    font-family: \5FAE\8F6F\96C5\9ED1, Tahoma, "宋体";
+    font-size: 13px;
+    color: #333333;
+    padding: 0;
+    height: 100%;
+    background-attachment: fixed;
+}
+body, div, dl, dt, dd, ul, ol, li, pre, form, fieldset, input, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: #4362BF;
+    text-decoration: none;
+}
+a:hover {
+    color: #4362BF;
+    text-decoration: underline;
+}
+fieldset, img {
+    border: 0 none;
+}
+address, caption, cite, code, dfn, em, th, var, i {
+    font-style: normal;
+    font-weight: normal;
+}
+ol li, ul li {
+    list-style: none outside none;
+}
+caption, th {
+    text-align: left;
+}
+q:before, q:after {
+    content: "";
+}
+/*table {
+    table-layout: fixed;
+}*/
+th, td {
+    vertical-align: middle;
+}
+i {
+    display: inline;
+    overflow: hidden;
+    font-size: 12px;
+}
+iframe {
+    background-color: #FFFFFF;
+}
+input[type="radio"], input[type="checkbox"] {
+    margin-right: 2px;
+}
+input {
+    -moz-background-clip: border;
+    -moz-background-inline-policy: continuous;
+    -moz-background-origin: padding;
+    font-family: \5FAE\8F6F\96C5\9ED1,Tahoma,Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    outline: medium none;
+    border-radius: 3px;
+}
+label input {
+    font-size: 13px;
+    position: relative;
+    top: 2px;
+}
+textarea {
+    font-size: 13px;
+    overflow: auto;
+    padding: 1px 0 0 1px;
+    border-radius: 3px;
+}
+select {
+    font-size: 13px;
+}
+cite {
+    display: none;
+    line-height: 33px;
+    text-indent: -999px;
+}
+.wrapper {
+    display: block;
+    margin-bottom: .6em;
+    *zoom: 1;
+}
+.bold {
+    font-weight: bold;
+}
+/* 清除浮动 */
+.clearfix:after, .wrapper:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    overflow: hidden;
+}
+.clearfix, .wrapper {display:block;}
+.clear {clear:both;}
+
+.hidden {
+    display: none;
+}
+.container {
+    width: 1000px;
+    margin: 0 auto;
+}
+.container:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    overflow: hidden;
+}
+.container {
+    display: block;
+}
+.inner {
+    padding: 10px;
+}
+/*******************************************************************************
+ * Layout
+ ******************************************************************************/
+#page {
+    padding: 0 10px;
+}
+#page-hd, #page-bd, #page-ft {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
+#page-bd {
+    width: 1020px;
+}
+#page-ft {
+    padding: 10px 0;
+    background-color: #F5F5F5;
+    border-top: #999 solid 1px;
+    text-align: center;
+}
+/*******************************************************************************
+ * Header
+ ******************************************************************************/
+#header {
+    padding: 10px 0;
+}
+#header li a {
+    display: inline-block;
+    padding: 8px 16px;
+    float: left;
+    background-color: #F5F5F5;
+    border: #999 solid 1px;
+    border-right: none;
+}
+#header li.first a {
+    border-radius: 5px 0 0 5px;
+}
+#header li.last a {
+    border-right: #999 solid 1px;
+    border-radius: 0 5px 5px 0;
+}
+#header li.active a, #header li a:hover {
+    background-color: #ccc;
+}
+/*******************************************************************************
+ * Article content
+ ******************************************************************************/
+.article-content {
+    line-height: 24px;
+}

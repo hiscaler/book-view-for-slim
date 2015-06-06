@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        {% block head %}
+            <link rel="stylesheet" href="{{ baseUrl() }}/static/css/app.css" />
+            <title>{% block title %}{% endblock %} - My Webpage</title>
+        {% endblock %}
+    </head>
+    <body>
+        <h1>404 NOT Found.</h1>
+        <p>出错啦。</p>
+    </body>
+</html>

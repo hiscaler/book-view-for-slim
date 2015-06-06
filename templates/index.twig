@@ -1,0 +1,11 @@
+{% extends "layouts/main.twig" %}
+
+{% block content %}
+
+    <ul>
+        {% for key, value in catalog %}
+            <li><a href="{{ urlFor('page', {'name': key | replace({'.md': ''})}) }}">{{ value }}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

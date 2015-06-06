@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        {% block head %}
+            <link rel="stylesheet" href="{{ uri.base }}/public/css/application.css" />
+            <link rel="stylesheet" href="{{ uri.base }}/public/css/normalize.css" />
+            <link rel="stylesheet" href="{{ uri.base }}/public/css/monokai_sublime.min.css" />
+            <title>{% block title %}{% endblock %} - Book Viewer</title>
+        {% endblock %}
+    </head>
+    <body>
+        <div id="page">
+            <div id="page-hd">
+                <div class="container">
+                    <div id="header">
+                        <ul>
+                            <li class='first'><a href="/">首页</a></li>
+                            {% for key, value in catalog %}
+                                {% set name = key | replace({'.md': ''}) %}
+                                <li class='{{ activeName == name ? 'active' : '' }}{{ loop.last ? ' last' : '' }}'><a href="{{ urlFor('page', {'name': name}) }}">{{ value }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="page-bd">
+                {% block content %}
+                {% endblock %}
+            </div>
+            <div id="page-ft">
+                &copy; Copyright {{ now | date('Y') }}
+            </div>
+        </div>
+        <script src="{{ uri.base }}/public/js/highlight.min.js"></script>
+        <script type="text/javascript">
+            hljs.initHighlightingOnLoad();
+        </script>
+    </body>
+</html>
