@@ -61,6 +61,8 @@ $app->get('/page/:name.html', function ($name) use ($app, $catalog, $bookPath) {
         'content' => $parser->parse(file_get_contents($filename)),
     ];
 
+    $app->etag(md5($article['content']));
+
     $app->render('view.twig', [
         'article' => $article,
         'catalog' => $catalog
