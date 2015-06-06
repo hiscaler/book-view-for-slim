@@ -1,7 +1,9 @@
 {% extends "layouts/main.twig" %}
 
-{% block content %}
-    <div class="article-content">
-        {{ data|raw }}
+{% block content %}   
+    <div class="post">
+        <h1 class="post-title"></h1>
+        {{ article.content | raw }}
+        <span class="post-date">最后修改时间：{{ article.lastModify | date('Y-m-d') }}</span>
     </div>
 {% endblock %}

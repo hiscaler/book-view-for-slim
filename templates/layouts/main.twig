@@ -1,40 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
     <head>
-        <meta charset="utf-8"/>
-        {% block head %}
-            <link rel="stylesheet" href="{{ uri.base }}/public/css/application.css" />
-            <link rel="stylesheet" href="{{ uri.base }}/public/css/normalize.css" />
-            <link rel="stylesheet" href="{{ uri.base }}/public/css/monokai_sublime.min.css" />
-            <title>{% block title %}{% endblock %} - Book Viewer</title>
-        {% endblock %}
+        <link href="http://gmpg.org/xfn/11" rel="profile"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <!-- Enable responsiveness on mobile devices-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"/>
+        <title>译：理解并掌握 JavaScript 中 this 的用法 &middot; MForever78</title>
+        <!-- CSS -->
+        <link rel="stylesheet" href="{{ uri.base }}/public/css/poole.css"/>
+        <link rel="stylesheet" href="{{ uri.base }}/public/css/syntax.css"/>
+        <link rel="stylesheet" href="{{ uri.base }}/public/css/lanyon.css"/>
+        <link rel="stylesheet" href="http://fonts.lug.ustc.edu.cn/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
     </head>
     <body>
-        <div id="page">
-            <div id="page-hd">
+        <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+         styles, `#sidebar-checkbox` for behavior. -->
+        <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox"/>
+        <!-- Toggleable sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-item">
+                <p>参考手册</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a class="sidebar-nav-item" href="/">首页</a>
+                {% for key, value in catalog %}
+                    {% set name = key | replace({'.md': ''}) %}
+                    <a class="sidebar-nav-item" href="{{ urlFor('page', {'name': name}) }}">{{ value }}</a>
+                {% endfor %}
+                <span class="sidebar-nav-item">Currently v1.0.0</span>
+            </nav>
+            <div class="sidebar-item">
+                <p>
+                    &copy; {{ now | date('Y') }}. All rights reserved.
+                </p>
+            </div>
+        </div>
+
+
+        <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+             content to avoid any CSS collisions with our real content. -->
+        <div class="wrap">
+            <div class="masthead">
                 <div class="container">
-                    <div id="header">
-                        <ul>
-                            <li class='first'><a href="/">首页</a></li>
-                            {% for key, value in catalog %}
-                                {% set name = key | replace({'.md': ''}) %}
-                                <li class='{{ activeName == name ? 'active' : '' }}{{ loop.last ? ' last' : '' }}'><a href="{{ urlFor('page', {'name': name}) }}">{{ value }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+                    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+                    <h3 class="masthead-title">
+                        <a href="/" title="Home">Book Viewer</a>
+                        <small>Online</small>
+                    </h3>
                 </div>
             </div>
-            <div id="page-bd">
+
+            <div class="container content">
                 {% block content %}
                 {% endblock %}
             </div>
-            <div id="page-ft">
-                &copy; Copyright {{ now | date('Y') }}
-            </div>
         </div>
-        <script src="{{ uri.base }}/public/js/highlight.min.js"></script>
-        <script type="text/javascript">
-            hljs.initHighlightingOnLoad();
-        </script>
     </body>
 </html>
