@@ -6,10 +6,11 @@ $configs = require 'configs/web.php';
 $app = new \Slim\Slim($configs);
 
 // Check book.path value
-$bookPath = $app->config('book.path');
-if (empty($bookPath)) {
-    die('You must config boo.path value in "' . dirname(__FILE__) . '/configs/web.php".');
+$bookName = $app->config('book.name');
+if (empty($bookName)) {
+    die('You must config boo.name value in "' . dirname(__FILE__) . '/configs/web.php".');
 }
+$bookPath = dirname(__FILE__) . '/books/' . $bookName;
 
 $view = $app->view();
 $view->setTemplatesDirectory('./templates');
@@ -49,16 +50,17 @@ $app->get('/', function () use ($app, $catalog) {
     ]);
 });
 
-$app->get('/page/:name.html', function ($name) use ($app, $catalog, $bookPath) {
+$app->get('/page/:name.html', function ($name) use ($app, $catalog, $bookName, $bookPath) {
     $name = trim($name);
     $filename = $bookPath . '/' . $name . '.md';
     if (!is_file($filename)) {
         $app->notFound();
     }
+
     $parser = new \cebe\markdown\GithubMarkdown();
     $article = [
         'lastModifyTime' => filemtime($filename),
-        'content' => $parser->parse(file_get_contents($filename)),
+        'content' => str_replace('src="assets', "src=\"/books/{$bookName}/assets", $parser->parse(file_get_contents($filename))),
     ];
 
     $app->etag(md5($article['content']));
