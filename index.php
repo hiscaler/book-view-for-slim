@@ -8,7 +8,7 @@ $app = new \Slim\Slim($configs);
 // Check book.path value
 $bookName = $app->config('book.name');
 if (empty($bookName)) {
-    die('You must config boo.name value in "' . dirname(__FILE__) . '/configs/web.php".');
+    die('You must config book.name value in "' . dirname(__FILE__) . '/configs/web.php".');
 }
 $bookPath = dirname(__FILE__) . '/books/' . $bookName;
 
@@ -66,7 +66,7 @@ $app->get('/page/:name.html', function ($name) use ($app, $catalog, $bookName, $
         'content' => str_replace('src="assets', "src=\"/books/{$bookName}/assets", $parser->parse(file_get_contents($filename))),
     ];
 
-    $app->etag(md5($article['content']));
+    $app->etag(md5($article['content'] . serialize($catalog)));
 
     $app->render('view.twig', [
         'article' => $article,
