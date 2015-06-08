@@ -29,17 +29,20 @@ $app->notFound(function() use ($app) {
     $app->render('404.twig');
 });
 
-// Book catalog
+// Book catalog( Support chapter categoly )
 $catalog = array();
 $filepath = $bookPath . '/catalog.md';
 $lines = file($filepath);
 if ($lines) {
+    $chapter = '';
     foreach ($lines as $line) {
         if (($line = trim($line)) === '') {
             continue;
         }
-        if ($line[0] === '*' && preg_match('/\[(.*?)\]\((.*?)\)/', $line, $matches)) {
-            $catalog[$matches[2]] = $matches[1];
+        if ($line[0] === '*') {
+            $chapter = trim($line, '*');
+        } elseif ($line[0] === '-' && preg_match('/\[(.*?)\]\((.*?)\)/', $line, $matches)) {
+            $catalog[$chapter][$matches[2]] = $matches[1];
         }
     }
 }

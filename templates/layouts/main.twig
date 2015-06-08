@@ -24,9 +24,11 @@
 
             <nav class="sidebar-nav">
                 <a class="sidebar-nav-item" href="/">首页</a>
-                {% for key, value in catalog %}
-                    {% set name = key | replace({'.md': ''}) %}
-                    <a class="sidebar-nav-item" href="{{ urlFor('page', {'name': name}) }}">{{ value }}</a>
+                {% for key, value in catalog %}                    
+                    <a class="sidebar-nav-item" href="javascript:;">{{ key }}</a>                
+                    {% for kk, vv in value %}
+                        <a class="sidebar-nav-item children" href="{{ urlFor('page', {'name': kk | replace({'.md': ''})}) }}">{{ vv }}</a>
+                    {% endfor %}
                 {% endfor %}
                 <span class="sidebar-nav-item">Currently v1.0.0</span>
             </nav>
